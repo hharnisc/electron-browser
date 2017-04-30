@@ -6,12 +6,14 @@ const webViewInit = ({
   onStartLoading,
   onStopLoading,
 }) => {
-  webview.addEventListener('did-start-loading', onStartLoading);
-  webview.addEventListener('did-stop-loading', onStopLoading);
+  webview.addEventListener('did-start-loading',
+    () => onStartLoading({ url: webview.getURL() }));
+  webview.addEventListener('did-stop-loading',
+    () => onStopLoading({ url: webview.getURL() }));
 };
 
 const WebView = ({
-  src,
+  url,
   onStartLoading,
   onStopLoading,
 }) =>
@@ -19,7 +21,7 @@ const WebView = ({
     style={{
       height: '100%',
     }}
-    src={src}
+    src={url}
     ref={webview => webViewInit({
       webview,
       onStartLoading,
@@ -28,7 +30,7 @@ const WebView = ({
   />;
 
 WebView.propTypes = {
-  src: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   onStartLoading: PropTypes.func.isRequired,
   onStopLoading: PropTypes.func.isRequired,
 };

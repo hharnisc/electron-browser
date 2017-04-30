@@ -1,5 +1,5 @@
 const initialState = {
-  src: 'https://electron.atom.io/',
+  url: 'https://electron.atom.io/',
 };
 
 const reducer = (state = initialState, action) => {
