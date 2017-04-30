@@ -1,6 +1,11 @@
 import React from 'react';
 
 const App = () =>
-  <div>Browser Window Goes Here</div>;
+  <webview
+    style={{
+      height: '100%',
+    }}
+    src={'https://electron.atom.io/'}
+  />;
 
 export default App;
