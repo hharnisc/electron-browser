@@ -22,7 +22,7 @@ class WebView extends Component {
     return (
       <webview
         style={{
-          height: '100%',
+          flexGrow: 1,
         }}
       />
     );
