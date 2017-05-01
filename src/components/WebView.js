@@ -1,38 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const webViewInit = ({
-  webview,
-  onStartLoading,
-  onStopLoading,
-}) => {
-  webview.addEventListener('did-start-loading',
-    () => onStartLoading({ url: webview.getURL() }));
-  webview.addEventListener('did-stop-loading',
-    () => onStopLoading({ url: webview.getURL() }));
-};
+class WebView extends Component {
+  static propTypes = {
+    url: PropTypes.string.isRequired,
+    onStartLoading: PropTypes.func.isRequired,
+    onStopLoading: PropTypes.func.isRequired,
+  }
 
-const WebView = ({
-  url,
-  onStartLoading,
-  onStopLoading,
-}) =>
-  <webview
-    style={{
-      height: '100%',
-    }}
-    src={url}
-    ref={webview => webViewInit({
-      webview,
-      onStartLoading,
-      onStopLoading,
-    })}
-  />;
+  componentDidMount() {
+    const webview = document.querySelector('webview');
 
-WebView.propTypes = {
-  url: PropTypes.string.isRequired,
-  onStartLoading: PropTypes.func.isRequired,
-  onStopLoading: PropTypes.func.isRequired,
-};
+    webview.addEventListener('did-start-loading',
+      this.props.onStartLoading);
+    webview.addEventListener('did-stop-loading',
+      () => this.props.onStopLoading({ url: webview.getURL() }));
+    webview.setAttribute('src', this.props.url);
+  }
+
+  render() {
+    return (
+      <webview
+        style={{
+          height: '100%',
+        }}
+      />
+    );
+  }
+}
 
 export default WebView;

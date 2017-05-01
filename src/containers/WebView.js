@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
+import { actions } from '../actions';
 import WebView from '../components/WebView';
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
-  onStartLoading: ({ url }) => console.log('url', url),
-  onStopLoading: ({ url }) => console.log('url', url),
+  onStartLoading: () => dispatch(actions.webViewStartLoading()),
+  onStopLoading: ({ url }) => dispatch(actions.webviewStopLoading({ url })),
 });
 export default connect(
   mapStateToProps,
