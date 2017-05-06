@@ -18,6 +18,16 @@ class WebView extends Component {
     webview.setAttribute('src', this.props.url);
   }
 
+  shouldComponentUpdate(nextProps) {
+    const webview = document.querySelector('webview');
+    return webview.getAttribute('src') !== nextProps.url;
+  }
+
+  componentDidUpdate() {
+    const webview = document.querySelector('webview');
+    webview.setAttribute('src', this.props.url);
+  }
+
   render() {
     return (
       <webview

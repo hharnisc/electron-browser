@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { actions } from '../actions';
+import { actions } from '../reducers/webview';
 import WebView from '../components/WebView';
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state.webview;
 const mapDispatchToProps = dispatch => ({
   onStartLoading: () => dispatch(actions.webViewStartLoading()),
   onStopLoading: ({ url }) => dispatch(actions.webviewStopLoading({ url })),
