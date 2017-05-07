@@ -3,6 +3,7 @@ import { actionTypes as webviewActionTypes } from './webview';
 export const actionTypes = {
   NAVBAR_URL_CHANGE: 'NAVBAR_URL_CHANGE',
   NAVBAR_URL_SUBMIT: 'NAVBAR_URL_SUBMIT',
+  NAVBAR_RELOAD: 'NAVBAR_RELOAD',
 };
 
 const initialState = {
@@ -28,6 +29,9 @@ export const actions = {
   navbarUrlSubmit: ({ url }) => ({
     type: actionTypes.NAVBAR_URL_SUBMIT,
     url,
+  }),
+  navbarReload: () => ({
+    type: actionTypes.NAVBAR_RELOAD,
   }),
 };
 

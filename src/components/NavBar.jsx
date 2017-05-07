@@ -5,8 +5,10 @@ const NavBar = ({
   url,
   canGoBack,
   canGoForward,
+  loading,
   onForwardClick,
   onBackClick,
+  onReloadClick,
   onChange,
   onSubmit,
 }) =>
@@ -27,6 +29,12 @@ const NavBar = ({
     >
       Forward
     </button>
+    <button
+      disabled={loading}
+      onClick={onReloadClick}
+    >
+      Reload
+    </button>
     <input
       style={{
         flexGrow: 1,
@@ -45,8 +53,10 @@ NavBar.propTypes = {
   url: PropTypes.string.isRequired,
   canGoBack: PropTypes.bool.isRequired,
   canGoForward: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   onForwardClick: PropTypes.func.isRequired,
   onBackClick: PropTypes.func.isRequired,
+  onReloadClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };

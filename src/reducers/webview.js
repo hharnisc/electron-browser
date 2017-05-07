@@ -11,19 +11,37 @@ const initialState = {
   pastUrls: [],
   url: 'https://electron.atom.io/',
   futureUrls: [],
+  loading: false,
+  reload: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.WEBVIEW_START_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case actionTypes.WEBVIEW_STOP_LOADING:
       if (action.url === state.url) {
-        return state;
+        return {
+          ...state,
+          loading: false,
+          reload: false,
+        };
       }
       return {
         ...state,
         pastUrls: [...state.pastUrls, state.url],
         url: action.url,
         futureUrls: [],
+        loading: false,
+        reload: false,
+      };
+    case navbarActionTypes.NAVBAR_RELOAD:
+      return {
+        ...state,
+        reload: true,
       };
     case navbarActionTypes.NAVBAR_URL_SUBMIT:
       if (action.url === state.url) {
@@ -39,6 +57,7 @@ const reducer = (state = initialState, action) => {
       const previous = state.pastUrls[state.pastUrls.length - 1];
       const newPastUrls = state.pastUrls.slice(0, state.pastUrls.length - 1);
       return {
+        ...state,
         pastUrls: newPastUrls,
         url: previous,
         futureUrls: [state.url, ...state.futureUrls],
@@ -48,6 +67,7 @@ const reducer = (state = initialState, action) => {
       const nextUrl = state.futureUrls[0];
       const newFutureUrl = state.futureUrls.slice(1);
       return {
+        ...state,
         pastUrls: [...state.pastUrls, state.url],
         url: nextUrl,
         futureUrls: newFutureUrl,

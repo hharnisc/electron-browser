@@ -20,7 +20,7 @@ class WebView extends Component {
 
   shouldComponentUpdate(nextProps) {
     const webview = document.querySelector('webview');
-    return webview.getAttribute('src') !== nextProps.url;
+    return webview.getAttribute('src') !== nextProps.url || nextProps.reload;
   }
 
   componentDidUpdate() {
