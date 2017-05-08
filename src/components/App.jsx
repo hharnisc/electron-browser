@@ -1,6 +1,7 @@
 import React from 'react';
 import WebView from '../containers/WebView';
 import NavBar from '../containers/NavBar';
+import TabBar from '../containers/TabBar';
 
 const App = () =>
   <div
@@ -11,6 +12,7 @@ const App = () =>
     }}
   >
     <NavBar />
+    <TabBar />
     <WebView />
   </div>;
 
