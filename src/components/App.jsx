@@ -1,5 +1,5 @@
 import React from 'react';
-import WebView from '../containers/WebView';
+import WebViews from '../containers/WebViews';
 import NavBar from '../containers/NavBar';
 import TabBar from '../containers/TabBar';
 
@@ -13,7 +13,7 @@ const App = () =>
   >
     <NavBar />
     <TabBar />
-    <WebView />
+    <WebViews />
   </div>;
 
 export default App;

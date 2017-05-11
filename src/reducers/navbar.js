@@ -4,6 +4,8 @@ export const actionTypes = {
   NAVBAR_URL_CHANGE: 'NAVBAR_URL_CHANGE',
   NAVBAR_URL_SUBMIT: 'NAVBAR_URL_SUBMIT',
   NAVBAR_RELOAD: 'NAVBAR_RELOAD',
+  NAVBAR_BACK: 'NAVBAR_BACK',
+  NAVBAR_FORWARD: 'NAVBAR_FORWARD',
 };
 
 const initialState = {
@@ -32,6 +34,12 @@ export const actions = {
   }),
   navbarReload: () => ({
     type: actionTypes.NAVBAR_RELOAD,
+  }),
+  navbarBack: () => ({
+    type: actionTypes.NAVBAR_BACK,
+  }),
+  navbarForward: () => ({
+    type: actionTypes.NAVBAR_FORWARD,
   }),
 };
 

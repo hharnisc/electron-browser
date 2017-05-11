@@ -1,17 +1,16 @@
 import { connect } from 'react-redux';
 import { actions } from '../reducers/navbar';
-import { actions as webviewActions } from '../reducers/webview';
 import NavBar from '../components/NavBar';
 
 const mapStateToProps = state => ({
   url: state.navbar.url,
-  canGoBack: state.webview.pastUrls.length > 0,
-  canGoForward: state.webview.futureUrls.length > 0,
-  loading: state.webview.loading,
+  canGoBack: state.webviews.webviews[state.webviews.selectedId].pastUrls.length > 0,
+  canGoForward: state.webviews.webviews[state.webviews.selectedId].futureUrls.length > 0,
+  loading: state.webviews.webviews[state.webviews.selectedId].loading,
 });
 const mapDispatchToProps = dispatch => ({
-  onBackClick: () => dispatch(webviewActions.webviewBack()),
-  onForwardClick: () => dispatch(webviewActions.webviewForward()),
+  onBackClick: () => dispatch(actions.navbarBack()),
+  onForwardClick: () => dispatch(actions.navbarForward()),
   onReloadClick: () => dispatch(actions.navbarReload()),
   onChange: ({ url }) => dispatch(actions.navbarUrlChange({ url })),
   onSubmit: ({ url }) => dispatch(actions.navbarUrlSubmit({ url })),

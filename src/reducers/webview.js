@@ -53,7 +53,7 @@ const reducer = (state = initialState, action) => {
         url: action.url,
         futureUrls: [],
       };
-    case actionTypes.WEBVIEW_BACK: {
+    case navbarActionTypes.NAVBAR_BACK: {
       const previous = state.pastUrls[state.pastUrls.length - 1];
       const newPastUrls = state.pastUrls.slice(0, state.pastUrls.length - 1);
       return {
@@ -63,7 +63,7 @@ const reducer = (state = initialState, action) => {
         futureUrls: [state.url, ...state.futureUrls],
       };
     }
-    case actionTypes.WEBVIEW_FORWARD: {
+    case navbarActionTypes.NAVBAR_FORWARD: {
       const nextUrl = state.futureUrls[0];
       const newFutureUrl = state.futureUrls.slice(1);
       return {
@@ -77,22 +77,5 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export const actions = {
-  webViewStartLoading: () => ({
-    type: actionTypes.WEBVIEW_START_LOADING,
-  }),
-  webviewStopLoading: ({ url }) => ({
-    type: actionTypes.WEBVIEW_STOP_LOADING,
-    url,
-  }),
-  webviewBack: () => ({
-    type: actionTypes.WEBVIEW_BACK,
-  }),
-  webviewForward: () => ({
-    type: actionTypes.WEBVIEW_FORWARD,
-  }),
-};
-
 
 export default reducer;
