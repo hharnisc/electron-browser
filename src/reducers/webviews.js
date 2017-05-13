@@ -11,13 +11,14 @@ const initialState = {
     loading: false,
     reload: false,
   },
-  {
-    pastUrls: [],
-    url: 'https://google.com/',
-    futureUrls: [],
-    loading: false,
-    reload: false,
-  }],
+  // {
+  //   pastUrls: [],
+  //   url: 'https://google.com/',
+  //   futureUrls: [],
+  //   loading: false,
+  //   reload: false,
+  // }
+],
 };
 
 const arrayCopy = array => array.slice();
@@ -28,8 +29,16 @@ const applyWebviewReducer = ({ id, webviews, action }) => {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log('action', action);
   switch (action.type) {
+    case webviewActionTypes.WEBVIEW_PAGE_NAVIGATE:
+      return {
+        ...state,
+        webviews: applyWebviewReducer({
+          id: action.id,
+          webviews: state.webviews,
+          action,
+        }),
+      };
     case webviewActionTypes.WEBVIEW_START_LOADING:
       return {
         ...state,
@@ -99,10 +108,15 @@ export const actions = {
     type: webviewActionTypes.WEBVIEW_START_LOADING,
     id,
   }),
-  webviewStopLoading: ({ url, id }) => ({
+  webviewStopLoading: ({ id }) => ({
     type: webviewActionTypes.WEBVIEW_STOP_LOADING,
+    id,
+  }),
+  webviewPageNavigate: ({ url, id, redirect }) => ({
+    type: webviewActionTypes.WEBVIEW_PAGE_NAVIGATE,
     url,
     id,
+    redirect,
   }),
 };
 

@@ -7,6 +7,7 @@ const WebViews = ({
   selectedId,
   onStartLoading,
   onStopLoading,
+  onPageNavigate,
 }) =>
   <div
     style={{
@@ -29,7 +30,9 @@ const WebViews = ({
             url={webview.url}
             reload={webview.reload}
             onStartLoading={() => onStartLoading({ id })}
-            onStopLoading={({ url }) => onStopLoading({ id, url })}
+            onStopLoading={() => onStopLoading({ id })}
+            onPageNavigate={({ url, redirect }) =>
+              onPageNavigate({ id, url, redirect })}
           />
         </div>,
       )
@@ -45,6 +48,7 @@ WebViews.propTypes = {
   ).isRequired,
   onStartLoading: PropTypes.func.isRequired,
   onStopLoading: PropTypes.func.isRequired,
+  onPageNavigate: PropTypes.func.isRequired,
   selectedId: PropTypes.number.isRequired,
 };
 

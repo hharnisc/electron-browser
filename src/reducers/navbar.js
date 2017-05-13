@@ -15,7 +15,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case webviewActionTypes.WEBVIEW_STOP_LOADING:
+    case webviewActionTypes.WEBVIEW_PAGE_NAVIGATE:
       return { ...state, url: action.url };
     case actionTypes.NAVBAR_URL_CHANGE:
       return { ...state, url: action.url };

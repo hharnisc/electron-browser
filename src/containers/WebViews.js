@@ -5,8 +5,10 @@ import WebViews from '../components/WebViews';
 const mapStateToProps = state => state.webviews;
 const mapDispatchToProps = dispatch => ({
   onStartLoading: ({ id }) => dispatch(actions.webViewStartLoading({ id })),
-  onStopLoading: ({ url, id }) =>
-    dispatch(actions.webviewStopLoading({ url, id })),
+  onStopLoading: ({ id }) =>
+    dispatch(actions.webviewStopLoading({ id })),
+  onPageNavigate: ({ url, id, redirect }) =>
+    dispatch(actions.webviewPageNavigate({ url, id, redirect })),
 });
 export default connect(
   mapStateToProps,

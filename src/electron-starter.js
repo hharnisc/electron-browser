@@ -1,4 +1,10 @@
 const electron = require('electron'); // eslint-disable-line import/no-extraneous-dependencies
+const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer'); // eslint-disable-line import/no-extraneous-dependencies
+
+installExtension(REDUX_DEVTOOLS)
+    .then(name => console.log(`Added Extension:  ${name}`)) // eslint-disable-line no-console
+    .catch(err => console.log('An error occurred: ', err)); // eslint-disable-line no-console
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.

@@ -5,21 +5,18 @@ export const actionTypes = {
   WEBVIEW_STOP_LOADING: 'WEBVIEW_STOP_LOADING',
   WEBVIEW_BACK: 'WEBVIEW_BACK',
   WEBVIEW_FORWARD: 'WEBVIEW_FORWARD',
+  WEBVIEW_PAGE_NAVIGATE: 'WEBVIEW_PAGE_NAVIGATE',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case actionTypes.WEBVIEW_START_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionTypes.WEBVIEW_STOP_LOADING:
+    case actionTypes.WEBVIEW_PAGE_NAVIGATE:
       if (action.url === state.url) {
+        return state;
+      } else if (action.redirect) {
         return {
           ...state,
-          loading: false,
-          reload: false,
+          url: action.url,
         };
       }
       return {
@@ -27,6 +24,15 @@ const reducer = (state, action) => {
         pastUrls: [...state.pastUrls, state.url],
         url: action.url,
         futureUrls: [],
+      };
+    case actionTypes.WEBVIEW_START_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionTypes.WEBVIEW_STOP_LOADING:
+      return {
+        ...state,
         loading: false,
         reload: false,
       };
