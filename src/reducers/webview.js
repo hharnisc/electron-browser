@@ -7,15 +7,7 @@ export const actionTypes = {
   WEBVIEW_FORWARD: 'WEBVIEW_FORWARD',
 };
 
-const initialState = {
-  pastUrls: [],
-  url: 'https://electron.atom.io/',
-  futureUrls: [],
-  loading: false,
-  reload: false,
-};
-
-const reducer = (state = initialState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.WEBVIEW_START_LOADING:
       return {

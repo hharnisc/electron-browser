@@ -9,6 +9,13 @@ const initialState = {
     futureUrls: [],
     loading: false,
     reload: false,
+  },
+  {
+    pastUrls: [],
+    url: 'https://google.com/',
+    futureUrls: [],
+    loading: false,
+    reload: false,
   }],
 };
 

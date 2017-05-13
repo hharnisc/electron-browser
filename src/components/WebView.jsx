@@ -9,18 +9,15 @@ class WebView extends Component {
   }
 
   componentDidMount() {
-    const webview = document.querySelector('webview');
-
-    webview.addEventListener('did-start-loading',
+    this.webview.addEventListener('did-start-loading',
       this.props.onStartLoading);
-    webview.addEventListener('did-stop-loading',
-      () => this.props.onStopLoading({ url: webview.getURL() }));
-    webview.setAttribute('src', this.props.url);
+    this.webview.addEventListener('did-stop-loading',
+      () => this.props.onStopLoading({ url: this.webview.getURL() }));
+    this.webview.setAttribute('src', this.props.url);
   }
 
   shouldComponentUpdate(nextProps) {
-    const webview = document.querySelector('webview');
-    return webview.getAttribute('src') !== nextProps.url || nextProps.reload;
+    return this.webview.getAttribute('src') !== nextProps.url || nextProps.reload;
   }
 
   componentDidUpdate() {
@@ -31,6 +28,7 @@ class WebView extends Component {
   render() {
     return (
       <webview
+        ref={ref => (this.webview = ref)}
         style={{
           flexGrow: 1,
         }}
