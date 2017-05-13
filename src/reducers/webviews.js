@@ -11,14 +11,13 @@ const initialState = {
     loading: false,
     reload: false,
   },
-  // {
-  //   pastUrls: [],
-  //   url: 'https://google.com/',
-  //   futureUrls: [],
-  //   loading: false,
-  //   reload: false,
-  // }
-],
+  {
+    pastUrls: [],
+    url: 'https://www.google.com/',
+    futureUrls: [],
+    loading: false,
+    reload: false,
+  }],
 };
 
 const arrayCopy = array => array.slice();
