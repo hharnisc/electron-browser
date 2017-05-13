@@ -1,5 +1,6 @@
 import { actionTypes as navbarActionTypes } from './navbar';
 import webviewReducer, { actionTypes as webviewActionTypes } from './webview';
+import { actionTypes as tabbarActionTypes } from './tabbar';
 
 const initialState = {
   selectedId: 0,
@@ -27,6 +28,7 @@ const applyWebviewReducer = ({ id, webviews, action }) => {
 };
 
 const reducer = (state = initialState, action) => {
+  console.log('action', action);
   switch (action.type) {
     case webviewActionTypes.WEBVIEW_START_LOADING:
       return {
@@ -81,6 +83,11 @@ const reducer = (state = initialState, action) => {
           webviews: state.webviews,
           action,
         }),
+      };
+    case tabbarActionTypes.TABBAR_SELECT_TAB:
+      return {
+        ...state,
+        selectedId: action.id,
       };
     default:
       return state;
