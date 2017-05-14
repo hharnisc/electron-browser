@@ -5,6 +5,7 @@ import Tab from './Tab';
 const TabBar = ({
   webviews,
   onTabClick,
+  onCloseClick,
 }) =>
   <div>
     <ul
@@ -23,6 +24,9 @@ const TabBar = ({
             id: i,
             url: tab.url,
           })}
+          onCloseClick={() => onCloseClick({
+            id: i,
+          })}
         />)
       }
       <li><button>Add</button></li>
@@ -34,6 +38,7 @@ TabBar.propTypes = {
     url: PropTypes.string.isRequired,
   })).isRequired,
   onTabClick: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default TabBar;

@@ -12,6 +12,11 @@ const mapDispatchToProps = dispatch => ({
     id,
     url,
   })),
+  onCloseClick: ({
+    id,
+  }) => dispatch(actions.closeTab({
+    id,
+  })),
 });
 
 export default connect(

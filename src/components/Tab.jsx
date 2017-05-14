@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const Tab = ({
   url,
   onTabClick,
+  onCloseClick,
 }) =>
   <li>
     <button
@@ -11,12 +12,17 @@ const Tab = ({
     >
       {url}
     </button>
-    <button>Close</button>
+    <button
+      onClick={onCloseClick}
+    >
+      Close
+    </button>
   </li>;
 
 Tab.propTypes = {
   url: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default Tab;

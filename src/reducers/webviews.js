@@ -97,6 +97,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         selectedId: action.id,
       };
+    case tabbarActionTypes.TABBAR_CLOSE_TAB:
+      // last tab - the app will get closed by middleware
+      if (state.webviews.length === 1) {
+        return state;
+      // closing last tab
+      } else if (state.webviews.length - 1 === action.id) {
+        return {
+          ...state,
+          selectedId: action.id - 1,
+          webviews: state.webviews.filter((webview, i) => i !== action.id),
+        };
+      }
+      return {
+        ...state,
+        webviews: state.webviews.filter((webview, i) => i !== action.id),
+      };
     default:
       return state;
   }
