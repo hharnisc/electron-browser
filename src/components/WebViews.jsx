@@ -17,22 +17,22 @@ const WebViews = ({
     }}
   >
     {
-      webviews.map((webview, id) =>
+      webviews.map(webview =>
         <div
-          key={id}
+          key={webview.id}
           style={{
             flexGrow: 1,
-            display: selectedId === id ? 'flex' : 'none',
+            display: selectedId === webview.id ? 'flex' : 'none',
             flexDirection: 'column',
           }}
         >
           <WebView
             url={webview.url}
             reload={webview.reload}
-            onStartLoading={() => onStartLoading({ id })}
-            onStopLoading={() => onStopLoading({ id })}
+            onStartLoading={() => onStartLoading({ id: webview.id })}
+            onStopLoading={() => onStopLoading({ id: webview.id })}
             onPageNavigate={({ url, redirect }) =>
-              onPageNavigate({ id, url, redirect })}
+              onPageNavigate({ id: webview.id, url, redirect })}
           />
         </div>,
       )
@@ -49,7 +49,7 @@ WebViews.propTypes = {
   onStartLoading: PropTypes.func.isRequired,
   onStopLoading: PropTypes.func.isRequired,
   onPageNavigate: PropTypes.func.isRequired,
-  selectedId: PropTypes.number.isRequired,
+  selectedId: PropTypes.string.isRequired,
 };
 
 export default WebViews;

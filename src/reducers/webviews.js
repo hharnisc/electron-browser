@@ -1,33 +1,41 @@
+import uuid from 'uuid';
 import { actionTypes as navbarActionTypes } from './navbar';
 import webviewReducer, { actionTypes as webviewActionTypes } from './webview';
 import { actionTypes as tabbarActionTypes } from './tabbar';
 
-const initialState = {
-  selectedId: 0,
-  webviews: [{
-    pastUrls: [],
-    url: 'https://electron.atom.io/',
-    futureUrls: [],
-    loading: false,
-    reload: false,
-  },
-  {
-    pastUrls: [],
-    url: 'https://www.google.com/',
-    futureUrls: [],
-    loading: false,
-    reload: false,
-  }],
+const generateNewWebview = ({ url }) => ({
+  id: uuid(),
+  pastUrls: [],
+  url,
+  futureUrls: [],
+  loading: false,
+  reload: false,
+});
+
+const generateInitialState = () => {
+  const webviews = [
+    generateNewWebview({
+      url: 'https://electron.atom.io/',
+    }),
+    generateNewWebview({
+      url: 'https://www.google.com/',
+    }),
+  ];
+  return {
+    selectedId: webviews[0].id,
+    webviews,
+  };
 };
 
-const arrayCopy = array => array.slice();
-const applyWebviewReducer = ({ id, webviews, action }) => {
-  const newWebviews = arrayCopy(webviews);
-  newWebviews[id] = webviewReducer(newWebviews[id], action);
-  return newWebviews;
-};
+const applyWebviewReducer = ({ id, webviews, action }) =>
+  webviews.map((webview) => {
+    if (webview.id === id) {
+      return webviewReducer(webview, action);
+    }
+    return webview;
+  });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = generateInitialState(), action) => {
   switch (action.type) {
     case webviewActionTypes.WEBVIEW_PAGE_NAVIGATE:
       return {
@@ -98,21 +106,22 @@ const reducer = (state = initialState, action) => {
         selectedId: action.id,
       };
     case tabbarActionTypes.TABBAR_CLOSE_TAB:
-      // last tab - the app will get closed by middleware
-      if (state.webviews.length === 1) {
-        return state;
-      // closing last tab
-      } else if (state.webviews.length - 1 === action.id) {
-        return {
-          ...state,
-          selectedId: action.id - 1,
-          webviews: state.webviews.filter((webview, i) => i !== action.id),
-        };
-      }
       return {
         ...state,
-        webviews: state.webviews.filter((webview, i) => i !== action.id),
+        webviews: state.webviews.filter(webview =>
+              webview.id !== action.id),
       };
+    case tabbarActionTypes.TABBAR_NEW_TAB: {
+      const newView = generateNewWebview({ url: 'https://www.google.com/' });
+      return {
+        ...state,
+        selectedId: newView.id,
+        webviews: [
+          ...state.webviews,
+          newView,
+        ],
+      };
+    }
     default:
       return state;
   }

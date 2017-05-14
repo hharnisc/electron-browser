@@ -6,6 +6,7 @@ const TabBar = ({
   webviews,
   onTabClick,
   onCloseClick,
+  onNewTabClick,
 }) =>
   <div>
     <ul
@@ -16,20 +17,27 @@ const TabBar = ({
         display: 'flex',
       }}
     >
-      {webviews.map((tab, i) =>
+      {webviews.map(tab =>
         <Tab
           url={tab.url}
-          key={i}
+          key={tab.id}
           onTabClick={() => onTabClick({
-            id: i,
+            id: tab.id,
             url: tab.url,
           })}
           onCloseClick={() => onCloseClick({
-            id: i,
+            id: tab.id,
+            webviews,
           })}
         />)
       }
-      <li><button>Add</button></li>
+      <li>
+        <button
+          onClick={onNewTabClick}
+        >
+          New
+        </button>
+      </li>
     </ul>
   </div>;
 
@@ -39,6 +47,7 @@ TabBar.propTypes = {
   })).isRequired,
   onTabClick: PropTypes.func.isRequired,
   onCloseClick: PropTypes.func.isRequired,
+  onNewTabClick: PropTypes.func.isRequired,
 };
 
 export default TabBar;

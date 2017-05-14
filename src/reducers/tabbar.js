@@ -1,6 +1,7 @@
 export const actionTypes = {
   TABBAR_SELECT_TAB: 'TABBAR_SELECT_TAB',
   TABBAR_CLOSE_TAB: 'TABBAR_CLOSE_TAB',
+  TABBAR_NEW_TAB: 'TABBAR_NEW_TAB',
 };
 
 export const actions = {
@@ -12,5 +13,8 @@ export const actions = {
   closeTab: ({ id }) => ({
     type: actionTypes.TABBAR_CLOSE_TAB,
     id,
+  }),
+  newTab: () => ({
+    type: actionTypes.TABBAR_NEW_TAB,
   }),
 };
